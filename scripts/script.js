@@ -16,3 +16,7 @@ function removeVideoStream (elementId) {
     let remDiv = document.getElementById(elementId);
     if (remDiv) remDiv.parentNode.removeChild(remDiv);
 }
+
+// Create client by invoking the AgoraRTC create client method. Takes JSON to initialize basic settings.
+let client  = AgoraRTC.createClient({ mode: "rtc", codec: "vp8" });
+client.init("c0041179099d492fa2dafcc82ec735c0"); // This function requires the App ID in string
