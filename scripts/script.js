@@ -44,3 +44,19 @@ client.on("stream-subscribed", (evt) => {
     addVideoStream(streamId);
     stream.play(streamId);
 }, handleFail);
+
+// Listen for streams being unpublished.
+client.on("stream-removed", (evt) => {
+    let stream = evt.stream;
+    let streamId = String(stream.getId());
+    stream.close();
+    removeVideoStream(streamId);
+}, handleFail);
+
+// Listen for users leaving video call.
+client.on("peer-leave", (evt) => {
+    let stream = evt.stream;
+    let streamId = String(stream.getId());
+    stream.close();
+    removeVideoStream(streamId);
+}, handleFail);
