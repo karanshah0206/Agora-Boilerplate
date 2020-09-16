@@ -23,11 +23,24 @@ client.init("c0041179099d492fa2dafcc82ec735c0"); // This function requires the A
 
 // Join a specific channel (room).
 client.join(null /* token - null if not present */, "channel-name", null /* if you need to specify custom ID */, (uid) => {
-
     // Create stream for local user.
     let localStream = AgoraRTC.createStream({ video: true, audio: true });
     localStream.init(() => {
         localStream.play("me"); // Play local stream "#me" div
         client.publish(localStream, handleFail); // Publish stream on server
     }, handleFail);
+}, handleFail);
+
+// Listen for remote streams added to the channel.
+client.on("stream-added", (evt) => {
+    // Subscribe to remote stream.
+    client.subscribe(evt.stream, handleFail);
+}, handleFail);
+
+// After remote stream subscribed. At this point, we're receiving the remote stream. Render it to the DOM.
+client.on("stream-subscribed", (evt) => {
+    let stream = evt.stream;
+    let streamId = String(stream.getId());
+    addVideoStream(streamId);
+    stream.play(streamId);
 }, handleFail);
