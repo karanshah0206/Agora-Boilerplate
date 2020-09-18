@@ -8,18 +8,33 @@ h1, h4 {
 
 #remote-container {
     display: flex;
+    width: 50%;
+    margin: 0 auto;
 }
 #remote-container video {
     height: auto;
     position: relative !important;
 }
+@media screen and (max-width: 500px) {
+    #remote-container {
+        width: 90%;
+        margin: 0 auto;
+    }
+}
 
 #me {
     position: relative;
-    width: 50%;
-    margin: 0 auto;
+    width: 30%;
     display: block;
 }
 #me video {
     position: relative !important;
+}
+@media screen and (max-width: 500px) {
+    #me {
+        position: relative;
+        width: 90%;
+        margin: 0 auto;
+        display: block;
+    }
 }
